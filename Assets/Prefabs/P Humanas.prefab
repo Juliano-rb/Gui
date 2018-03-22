@@ -944,7 +944,7 @@ MonoBehaviour:
   mensagemGB: {fileID: 102025425008446944}
   msgDelay: 3
   falas:
-  - "N\xE3o ao Golpee!!"
+  - "Quero a resenha cr\xEDtica para amanh\xE3!"
   - Terminou o artigo??
   - Vamos publicar!
   - Depois do feriado//n tem prova.
