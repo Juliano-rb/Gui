@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Speech : MonoBehaviour {
@@ -9,12 +10,13 @@ public class Speech : MonoBehaviour {
 	public bool falando = true;
 	//Objeto que contém a mensagem
 	public Transform DialogBox;
-	//Texto da mensagem que será alterado
-	public TextMesh mensagemGB;
+    //Texto da mensagem que será alterado
+    public TextMeshPro mensagemGB;
 	private Transform direction;
 	//Tempo que uma mensagem ficará sendo exibida
 	public float msgDelay = 10000;
 	//Array de falas
+    [TextArea]
 	public string[] falas;
 	//Contador de tempo da msg atual
 	private float msgTime = 0;

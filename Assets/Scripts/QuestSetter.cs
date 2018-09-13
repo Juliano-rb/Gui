@@ -6,8 +6,11 @@ using UnityEngine;
  * Esta classe guarda informações no geral sobre a missão, guarda onde o usuario pegará a missão e onde ela será concluída, e atribui os dados necessários aos objetos
  * */
 public class QuestSetter : MonoBehaviour {
+
+    [TextArea]
 	public string titleQuest;
-	public string descriptionQuest;
+    [TextArea]
+    public string descriptionQuest;
 	public int IDQuest;
 
 	public GameObject objetoEntrada; 
@@ -15,7 +18,7 @@ public class QuestSetter : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		Debug.Log ("Configurando objetos referentes à missão " + IDQuest);
+		//Debug.Log ("Configurando objetos referentes à missão " + IDQuest);
 
 		objetoEntrada.AddComponent<Quest>();
 

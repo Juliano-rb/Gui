@@ -2,14 +2,16 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class QuestManager : MonoBehaviour {
 	public UIConector uiConector;
 	public RectTransform telaFimLevel;
 	public List<Quest> penddingQuests;
 	public RectTransform questWindow;
-	public Text TitleMission;
-	public Text DescMission;
+
+    public TextMeshProUGUI MissionGUITitle;
+    public TextMeshProUGUI MissionGUIDesc;
 
 	public GameManager gm;
 	private Quest questAberta;
@@ -90,7 +92,7 @@ public class QuestManager : MonoBehaviour {
 
 	public void concluirQuest(int questID){
 		int id = getQuestIndex (questID);
-		Debug.Log("ID:" + id);
+		//Debug.Log("ID:" + id);
 		penddingQuests[id].complete();
 		Quest completed = penddingQuests [getQuestIndex (questID)];
 		penddingQuests.Remove (penddingQuests[getQuestIndex(questID)]);
@@ -129,10 +131,13 @@ public class QuestManager : MonoBehaviour {
 		Time.timeScale = 0;
 		this.questAberta = q;
 
-		TitleMission.text= questAberta.title;
-		DescMission.text = questAberta.descricao;
+		MissionGUITitle.text= questAberta.title;
+        MissionGUIDesc.text = questAberta.descricao;
 
-		gm.mudarParaTela (questWindow);
+
+        questWindow.GetChild(1).GetChild(0).GetComponent<Button>().Select();
+
+        gm.mudarParaTela (questWindow);
 	}
 
 	public void reset(){

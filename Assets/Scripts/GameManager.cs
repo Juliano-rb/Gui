@@ -9,8 +9,12 @@ public class GameManager : MonoBehaviour {
     public RectTransform viewFalhaAcessibilidade;
 	public RectTransform viewTelaInicial;
 	public RectTransform viewGameOver;
+    public RectTransform viewMissions;
 
-	public RectTransform telaAtual = null;
+    public RectTransform telaAtual = null;
+
+    public Transform[] hiPolyObjects;
+    public Toggle menuToggle;
 
 	//Textos da janela de falha de acessibilidade
     public Text TitleField;
@@ -36,7 +40,7 @@ public class GameManager : MonoBehaviour {
 	void Start(){
 		//Pausa o Jogo
 		Time.timeScale = 0;
-		Debug.Log ("Carregando pontos de spaw de inimigos...");
+		//Debug.Log ("Carregando pontos de spaw de inimigos...");
 
 		for (int i = 0; i < spawPointsGroup.childCount; i++) {
 			spawPointsScripts.Add( spawPointsGroup.GetChild(i).gameObject.GetComponent<SpawPoint>() );
@@ -46,10 +50,38 @@ public class GameManager : MonoBehaviour {
 
 		StartCoroutine ("updateLeaderBoard");
 	}
-		
+
+    
+    private void Update()
+    {
+        if (Input.GetButton("Cancel") && Time.deltaTime != 0)
+        {
+            pauseGame();
+        }
+
+        
+        if (Input.GetButtonDown("MiniWindow") && Time.deltaTime != 0)
+        {
+            showMissions();
+        }
+
+
+    }
+
+    public void selectGUIItem(Selectable item)
+    {
+        item.Select();
+    }
+
+    public void showMissions()
+    {
+        viewMissions.gameObject.SetActive(!viewMissions.gameObject.activeSelf);
+ 
+    }
+
     public void ShowFalha(Falha f)
     {
-		Debug.Log("Exibindo tela de falha");
+		//Debug.Log("Exibindo tela de falha");
 
 		mudarParaTela (viewFalhaAcessibilidade);
         TitleField.text = f.Title;
@@ -57,9 +89,11 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 0;
     }
 	public void showGameOver(){
-		
-		mudarParaTela (viewGameOver);
+
+        viewGameOver.GetChild(1).GetChild(0).GetComponent<Button>().Select();
+        mudarParaTela (viewGameOver);
 	}
+
 	public void mudarParaTela(RectTransform tela){
 		if (tela) {
 			this.viewTelaInicial.parent.gameObject.SetActive (true);
@@ -68,18 +102,19 @@ public class GameManager : MonoBehaviour {
 				this.telaAtual.gameObject.SetActive (false);
 			this.telaAtual = tela;
 			this.telaAtual.gameObject.SetActive (true);
-		} else {
+
+        } else {
 			startGame ();
 		}
 	}
 	public void updateLeaderBoard(){
-		Debug.Log ("Carregando Scores");
+        //Debug.Log ("Carregando Scores");
 		leaderBoard.LoadScores ();
 		//leaderBoard.ToListHighToLow();
 
 	}
 	public int updateScore(int score){
-		Debug.Log ("Atualizando pontuação no hanking");
+		//Debug.Log ("Atualizando pontuação no hanking");
 	
 		leaderBoard.AddScore (this.playerName, score);
 
@@ -148,5 +183,14 @@ public class GameManager : MonoBehaviour {
 			
 		startGame ();
 	}
-  
+
+    public void disableHipolyObjects()
+    {
+        foreach (Transform t in hiPolyObjects)
+        {
+            t.gameObject.SetActive(!menuToggle.isOn);
+        }
+    }
+
+
 }

@@ -4,16 +4,16 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Chao
   - Falha
   - Cadeirante
-  - NaoCadeirante
-  - sceneChanger
+  - Chao
   - Enemy
-  - Projetil
   - Quest
-  - questEnd
   - questEntry
+  - questEnd
+  - sceneChanger
+  - NegativeBTN
+  - AfirmativeBTN
   layers:
   - Default
   - TransparentFX

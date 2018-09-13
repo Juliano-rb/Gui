@@ -19,6 +19,9 @@ public class CharacController : MonoBehaviour
   	
 	public float startingEnergia = 100;
 	public float energia = 100;
+
+    public ParticleSystem specialParticle;
+    public Transform particleTransform;
 	/*
 	 * Status do jogo
 	 * -Eventos globais
@@ -79,6 +82,10 @@ public class CharacController : MonoBehaviour
 		//Passa 10 segundos sem os professores o perseguirem
 		this.alunoReclamao += 10;
 		this.energia -= 30;
+
+        Destroyer timer = Instantiate(specialParticle, particleTransform.transform).GetComponent<Destroyer>();
+        timer.timer = this.alunoReclamao;
+        
 	}
 	void atirarObjeto(){
 		this.energia -= 5;
@@ -137,7 +144,7 @@ public class CharacController : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         GameObject gb = other.gameObject;
-		Debug.Log("Colidiu");
+		//Debug.Log("Colidiu");
 		if (gb.CompareTag("Falha"))
         {
             gm.ShowFalha(gb.GetComponent<Falha>());
