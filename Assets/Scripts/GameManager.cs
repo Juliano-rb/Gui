@@ -150,7 +150,9 @@ public class GameManager : MonoBehaviour {
 		//this.paused = true;
 		Time.timeScale = 0;
 		mudarParaTela(viewTelaInicial);
-	}
+        
+        viewTelaInicial.GetChild(1).GetChild(1).GetComponent<Button>().Select();
+    }
 
 	public void updateForca(float valor){
 		this.forcaSlider.value = valor;
@@ -191,6 +193,4 @@ public class GameManager : MonoBehaviour {
             t.gameObject.SetActive(!menuToggle.isOn);
         }
     }
-
-
 }

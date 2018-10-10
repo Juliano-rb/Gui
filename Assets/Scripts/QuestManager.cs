@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine.UI;
+using UnityEditor;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -45,7 +46,9 @@ public class QuestManager : MonoBehaviour {
 		startLevel (1);
 	}
 
-	public void nextLevel(){
+
+    [ContextMenu("Proximo Nivel")]
+    public void nextLevel(){
 		this.questsCompThisLevel = 0;
 		this.gm.restartGame (this.level + 1);
 
@@ -53,6 +56,7 @@ public class QuestManager : MonoBehaviour {
 
 		this.gm.pauseGame ();
 		this.gm.mudarParaTela (this.telaFimLevel);
+        telaFimLevel.GetChild(1).GetComponent<Button>().Select();
 
 	}
 
